@@ -9,7 +9,7 @@ def Menu():
     print('=================================')
     print('1. Lei de Formação de Matrizes')
     print('2. Multiplicação Escalar de Matriz')
-    print('3. Produto de Matrizes (Em desenvolvimento)')
+    print('3. Produto de Matrizes')
     print('4. Sair')
 
     op = int(input("Escolha uma opção -> "))
@@ -19,7 +19,7 @@ def Menu():
     elif op == 2:
         Multiplicacao_Escalar_De_Matriz()
     elif op == 3:
-        print("Função Produto de Matrizes ainda não implementada.")
+        Produto_De_Matrizes()
     elif op == 4:
         print('Saindo...')
         exit()
@@ -83,9 +83,9 @@ def Multiplicacao_Escalar_De_Matriz():
 # PRODUTO DE MATRIZES -----------------------------------------------------------------------------------------------
 def Produto_De_Matrizes():
     print('=================================')
-    print('PRODUTO DE MATRIZES (EM DESENVOLVIMENTO)')
+    print('PRODUTO DE MATRIZES')
     print('=================================')
-    n1 = int( input('Digite o tamanho da matriz A e B(Quadrada): ') )
+    n1 = int( input('Digite o tamanho da matriz A e B (Quadrada): ') )
     n2 = n1
 
     # Matriz A
@@ -96,4 +96,27 @@ def Produto_De_Matrizes():
             j = c + 1
             numero = int(input(f'Digite o número na posição {i},{j} da matriz A: '))
             matA[l][c] = numero
+
+    # Matriz B
+    matB = np.zeros((n2, n2), dtype=int)
+    for l in range(n2):
+        for c in range(n2):
+            i = l + 1
+            j = c + 1
+            numero = int(input(f'Digite o número na posição {i},{j} da matriz B: '))
+            matB[l][c] = numero
+
+    # Produto das matrizes
+    matC = np.zeros((n1, n2), dtype=int)
+    for l in range(n1):
+        for c in range(n2):
+            for k in range(n1):
+                matC[l][c] += matA[l][k] * matB[k][c]
+
+    print("\nMatriz resultante:")
+    for linha in matC:
+        print(linha)
+
+    input("\nPressione Enter para voltar ao menu.")
+    Menu()
 Menu()
